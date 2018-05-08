@@ -1,0 +1,11 @@
+RewriteEngine On     
+   RewriteRule ^index\.html$ /index.php
+   RewriteRule ^zixun/?(index\.html)?$ /article.php?ac=list
+   RewriteRule ^zixun/list_([0-9]+)_([0-9]+)\.html /article.php?ac=list&tid=$1&page=$2
+   RewriteRule ^blog_([0-9]+)\.html$ /index.php?action=showmain&blogid=$1
+   RewriteRule ^userblog_([0-9]+)\.html$ /index.php?action=userblog&user=$1
+   RewriteRule ^topiclist_([0-9]+)\-subtype_([0-9]+)\.html$ /index.php?action=topiclist&blogid=$1&subtype=$2
+   RewriteRule ^read_([0-9]+)\-topic_([0-9]+)\.html$ /index.php?action=viewtopic&blogid=$1&topicid=$2
+   RewriteRule ^topiclist_([0-9]+)\.html$ /index.php?action=topiclist&blogid=$1
+   RewriteRule ^album_([0-9]+)\.html$ /index.php?action=album&blogid=$1
+   RewriteRule ^album_([0-9]+)\-folder_([0-9]+)\.html$ /index.php?action=showalbum&blogid=$1&albumid=$2

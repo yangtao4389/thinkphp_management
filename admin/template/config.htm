@@ -1,0 +1,76 @@
+<div id="body">
+    <div class="space">
+			 <table class="maintable" border="0" cellspacing="0" cellpadding="0"> 
+	    <tr class="altbg2"><th>
+                <ul class="subtab">
+				<li  <!--{if !isset($_GET['op']) || $_GET['op']=='base'}--> class="current" <!--{/if}-->><a href="admincp.php?ac=config&op=base">基本设置</a></li>
+				<li  <!--{if $_GET['op']=='member'}--> class="current" <!--{/if}-->><a href="admincp.php?ac=config&op=member">会员相关</a></li>
+				<li  <!--{if  $_GET['op']=='article'}--> class="current" <!--{/if}-->><a href="admincp.php?ac=config&op=article">文章设置</a></li>
+           </ul>
+            </th></tr>
+		<tr class="altbg2"><td>调用方式:$howcalled</td></tr>
+	  </table>	
+ 	<form method="post" action="admincp.php?ac=config">
+     <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+	 <!--{if $_GET['op']=='base'}-->
+             <tr>
+                <td width="20%" class="altbg1"><strong>网站名称:</strong>网站名称，将显示在页面标题后边</td>
+                <td><input type="text" name="config[webname]" class="txtbox" value="$config[webname]" />webname</td>
+            </tr>
+			<tr>
+                <td   class="altbg1"><strong>主页链接名:</strong>链接到首页时的名称</td>
+                <td><input type="text" name="config[navname]" class="txtbox" value="$config[navname]" />navname</td>
+            </tr>
+            <tr>
+                <td class="altbg1"><strong>站点访问url:</strong>例如:http://www.abc.com/末尾要加“/” 。</td>
+                <td><input type="text" name="config[weburl]" class="txtbox" value="$config[weburl]" />weburl</td>
+            </tr>
+             <tr>
+                <td class="altbg1"><strong>网站关键字:</strong>header 头中keyword部分</td>
+                <td><input type="text" name="config[keyword]" class="txtbox" value="$config[keyword]" />keyword</td>
+            </tr>
+			<tr>
+                <td class="altbg1"><strong>网站描述:</strong>header 头中description部分</td>
+                <td><input type="text" name="config[description]" class="txtbox" value="$config[description]" />description</td>
+            </tr>
+             <tr>
+                <td class="altbg1"><strong>网站统计代码:</strong>直接把html代码放进去</td>
+                <td><textarea name="config[webtj]" rows="5" cols="40" class="txtarea">$config[webtj]</textarea>webtj</td>
+            </tr>
+			<tr>
+                <td class="altbg1"><strong>图片存储路径:</strong>例如 uploadpic/注意前边没有'/'</td>
+                <td><input type="text" name="config[uploadpicpath]" class="txtbox" value="$config[uploadpicpath]" />uploadpicpath</td>
+            </tr>
+ 		<!--{elseif $_GET['op']=='member'}-->
+  
+			<tr>
+                <td class="altbg1"><strong>网站主服务QQ:</strong>当前服务网站主的qq,当一个人数基本够时,可设置成另一个</td>
+                <td><input type="text" name="config[weberserviceqq]" class="txtbox" value="$config[weberserviceqq]" />weberserviceqq</td>
+            </tr>
+			<tr>
+                <td class="altbg1"><strong>广告主服务QQ:</strong>当前服务广告主的qq,当一个人数基本够时,可设置成另一个</td>
+                <td><input type="text" name="config[aderserviceqq]" class="txtbox" value="$config[aderserviceqq]" />aderserviceqq</td>
+            </tr>
+		<!--{elseif $_GET['op']=='article'}-->
+			<tr>
+                <td class="altbg1"><strong>文章列表页默认模板:</strong>不包含网站根目录,例如:article/template/default/list.htm</td>
+                <td><input type="text" name="config[deftmplist]" class="txtbox" value="$config[deftmplist]" />deftmplist</td>
+            </tr>
+			<tr>
+                <td class="altbg1"><strong>文章内容页默认模板:</strong>不包含网站根目录,例如:article/template/default/content.htm</td>
+                <td><input type="text" name="config[deftmpcontent]" class="txtbox" value="$config[deftmpcontent]" />deftmpcontent</td>
+            </tr>
+			<tr>
+                <td class="altbg1"><strong>图片访问域名:</strong>例如:http://img11.2366.com</td>
+                <td><input type="text" name="config[artimgdomain]" class="txtbox" value="$config[artimgdomain]" />artimgdomain</td>
+            </tr>
+		 	<tr>
+                <td class="altbg1"><strong>水印图片路径:</strong>例如images/mark.png</td>
+                <td><input type="text" name="config[waterpath]" class="txtbox" value="$config[waterpath]" />waterpath</td>
+            </tr> 
+ 		  <!--{/if}-->
+		   </table>
+        <center><input type="submit" name="configsubmit" value=" 提交 " class="btn" /></center>
+	</form>
+    </div>
+</div>

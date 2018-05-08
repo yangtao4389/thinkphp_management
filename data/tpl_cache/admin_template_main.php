@@ -1,0 +1,36 @@
+<?php if(!defined('IN_WEB')) exit('Access Denied');?>
+<div id="body">
+     
+    <div class="space">
+        <div class="subtitle">当前登录用户信息</div>
+        <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+            <tr class="altbg1">
+                <td width="30%">用户名称</td>
+                <td width="20%">用户组</td>
+                <td width="50%">最后登录信息</td>
+            </tr>
+            <tr style="background:#F0FFF8;">
+                 <td><?=$_SGLOBAL['super_username']?></td>
+                <td><?=$memberinfo['groupname']?></td>
+                <td>ip:<?=$memberinfo['lastloginip']?>时间:<?php echo newdate($memberinfo['lastlogintime'],'Y-m-d H:i:s'); ?></td>
+            </tr>
+             
+        </table>
+    </div>
+    <div class="space">
+        <div class="subtitle">系统信息</div>
+        <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+            <tr id="trNewversion" style="display:none;"><td colspan="2">---</td></tr>
+             <tr><td class="altbg1">PHP版本</td><td><?=$server['phpver']?>&nbsp;</td></tr>
+            <tr><td class="altbg1">MySQL版本</td><td><?=$server['mysqlver']?>&nbsp;</td></tr>
+            <tr><td width="200" class="altbg1">服务器时间:</td><td><?=$server['time']?></td></tr>
+            <tr><td class="altbg1">文件上传:</td><td><?=$server['upfile']?></td></tr>
+            <tr><td class="altbg1">全局变量 register_globals:</td><td><?=$server['register_globals']?>(建议关闭)</td></tr>
+            <tr><td class="altbg1">安全模式 safe_mode:</td><td><?=$server['safe_mode']?> </td></tr>
+            <tr><td class="altbg1">图形处理 GD Library:</td><td><?=$server['gd']?></td></tr>
+            <tr><td class="altbg1">Magic_Quotes_Gpc:</td><td><?=$server['magic_quotes_gpc']?></td></tr>
+            <tr><td class="altbg1">内存占用:</td><td><?=$server['memory']?> KB</td></tr>
+        </table>
+    </div>
+   
+</div>

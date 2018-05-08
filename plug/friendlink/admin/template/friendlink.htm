@@ -1,0 +1,46 @@
+<div id="body">
+    <div class="space">
+	<!--{if $_GET['op']=='friendlinklist' }-->
+	<div class="subtitle">友情链接列表</div>
+ 	    <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+            <tr class="altbg1">
+                <td  >网站名</td>
+ 				<td>时间</td>
+                <td width="100">操作</td>
+            </tr>
+            <!--{loop $friendarr $val}-->
+              <tr>
+                <td><a href="$val[weburl]" target="_blank">$val[webname]</a></td> 
+				<td>$val[adddt]</td>
+                  <td><a href="$baseurl&ac=friendlink&op=editfriendlink&id=$val[id]">修改</a>&nbsp;<a href="$baseurl&ac=friendlink&op=del&fdlid=$val[id]" onClick="return window.confirm('本操作不可逆，您确认删除吗？');">删除</a> </td>
+            </tr>
+           <!--{/loop}-->
+ 		   <tr>
+               <td colspan="3"><input type="button" class="btn" onclick="location.href='$baseurl&ac=friendlink&op=addfriendlink';" value="添加友情链接" />   </td>
+           </tr>
+        </table>
+  <div class="tab"><div class="pages">$multi</div></div>
+<!--{elseif $_GET['op']=='addfriendlink' || $_GET['op']=='editfriendlink' }-->
+	<div class="subtitle">添加/修改友情链接</div>
+ 		<form method="post" action="$baseurl&ac=friendlink">
+		 <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+ 		   <tr>
+                <td class="altbg1"><strong>网站名:</strong>若套红等可自己写html代码</td>
+                <td><input type="text" name="friend[webname]"  value="$friend[webname]" class="txtbox2" />
+ 				</td>
+            </tr>
+			 <tr>
+		     <td   class="altbg1"><strong>自定义链接:</strong></td>
+		     <td><input type="text"  name="friend[weburl]" class="txtbox2" value="$friend[weburl]"/></td>
+	       </tr>
+		   <tr>
+		     <td  class="altbg1"><strong>logo图片</strong>*可不填写</td>
+		     <td><input type="text"  name="friend[logpic]" class="txtbox2" id="friend[logpic]"  value="$friend[logpic]"/><input type="button" value="上传图片" onclick="_openwindow('admincp.php?mod=admin&ac=upfile&op=addimg&pele=friend[logpic]');"/></td>
+	       </tr>
+   	  </table>
+	   <center><input type="hidden"  name="fdlid" value="$friend[id]" />
+		<input type="submit" name="fdlsubmit" value=" 提交 " class="btn" /></center>
+      </form>
+ 	  <!--{/if}-->
+ 	</div>
+</div>

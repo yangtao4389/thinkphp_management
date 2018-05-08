@@ -1,0 +1,80 @@
+<div id="body">
+    <div class="space">
+     <!--{if $_GET['op']=='filelist'}-->
+	 <div class="subtitle">上传文件列表</div>
+ 	    <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+		<form name="form1" action="admincp.php" method="get">
+             <tr class="altbg2">
+               <td colspan="6">用户名:<input type="text" name="username" value="$_GET[username]"/>&nbsp;尺寸
+			   <select name="imgwh">
+			   <option value="0">全部</option>
+			  	<!--{loop $imgwharr $value}-->
+			   <option value="$value[imgwh]" <!--{if $_GET['imgwh']==$value['imgwh']}-->selected<!--{/if}-->>$value[imgwh]</option>
+			   <!--{/loop}-->
+			   </select><input type="submit" class="btn" value="查询"/>&nbsp;<input type="button" onClick="location.href='admincp.php?ac=upfile&op=addimg';" class="btn" value="上传文件"/></td>
+             </tr><input type="hidden" value="upfile" name="ac"/><input type="hidden" value="filelist" name="op"/><input type="hidden" value="admin" name="mod"/>
+		</form>	 
+         
+             <tr class="altbg1">
+                <td width="20">ID</td>
+                <td>用户名</td>
+                <td>尺寸</td>
+                <td>路径</td>
+                <td>时间</td>
+                <td>操作</td>
+            </tr>   
+            <!--{loop $filelistarr $val}-->
+           
+             
+              <tr>
+                <td>$val[id]</td>
+                <td>$val[username]</td>
+                <td>$val[imgwh]</td> 
+                <td><a href="$val[uploadpath]" target="_blank" onmousemove="$('#picpre').attr('src','$val[uploadpath]');">$val[uploadpath]</a></td>
+                <td><!--{date($val['uploadtime'],'Y-m-d H:i:s')}--></td>
+                <td><a href="admincp.php?ac=upfile&op=del&imgid=$val[id]" onClick="return window.confirm('确认要删除吗？');">删除</a></td>
+            </tr>
+           <!--{/loop}--> 
+		    <tr>
+                <td colspan="6"></td>
+              </tr>
+			      <tr>
+               <td colspan="6"><img src="" id="picpre" /></td>
+             </tr>
+       </table>
+	<div class="tab"><div class="pages">$multi</div></div>
+<!--{elseif $_GET['op']=='addimg'}--> 
+	<div class="subtitle">上传文件</div>
+		 	<form method="post" enctype="multipart/form-data"  action="admincp.php?ac=upfile">
+        <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+             <tr>
+                <td width="30%" class="altbg1"><strong>类型:</strong></td>
+                <td><input name="uptype" type="radio" value="1" checked>
+                  图片 <input type="radio" name="uptype" value="2">Flash
+               </td>
+            </tr>
+             <tr>
+               <td class="altbg1"><strong>Flash:</strong>只有当选项是flash时才起作用</td>
+               <td><input type="file" name="fileswf"></td>
+             </tr>
+		 
+             <tr id="upimgshow">
+                <td class="altbg1"><strong>图片:</strong></td>
+                <td id="imglist">1.<input type="file" name="fileup[]"><input type="button"  class="btn"  value="增加图片框" onClick="addimgbox();"/><br></td>
+            </tr>
+        </table>	 
+        <center><input type="hidden" name="pele" value="$_GET[pele]" /><input type="submit" name="upfilesubmit" value=" 提交 " class="btn" />&nbsp;<input type="button" name="ishavedpic" value="选择已有图片" onclick="location.href='admincp.php?mod=admin&ac=upfile&op=filelist';" class="btn" /></center>
+	</form>
+	<script language="javascript">
+	function imgswf(){
+		
+	}
+	var value=1;
+	function addimgbox(){
+		value +=1;
+		$("#imglist").append(value+'.<input type="file" name="fileup[]"><br>');
+	}
+	</script>
+<!--{/if}-->
+  </div> 
+</div>

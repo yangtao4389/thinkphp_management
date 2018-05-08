@@ -1,0 +1,148 @@
+<div id="body">
+    <div class="space">
+	
+	
+	
+<!--{if $_GET['op']=='contentlist'}--><!-- 内容列表 -->
+<div class="subtitle">自定义内容管理</div>
+	 <table class="maintable" border="0" cellspacing="0" cellpadding="0"> 
+	    <tr class="altbg2">
+			<td>
+ 			<!--{loop $typearr $key=>$value}-->
+				 <!--{if $_GET['ptid']==$value['id'] }--> 
+				<b> $value[typename]</b> | 
+				 <!--{else}-->
+				  <a href="$baseurl&ac=diycontent&op=contentlist&ptid=$value[id]">$value[typename]</a> | 
+				  <!--{/if}-->
+				   <!--{if $key>0 &&($key %10==0)}-->
+					<br />
+					<!--{/if}-->
+			<!--{/loop}-->
+            </td></tr>
+ 	  </table>
+ 	    <table class="maintable" border="0" cellspacing="0" cellpadding="0"> 
+              <tr class="altbg1">
+                <td>id</td>
+			    <td>标题</td>
+                <td>时间</td>
+                <td width="100">操作</td>
+            </tr>
+            <!--{loop $qcarr $val}-->
+               <tr>
+                <td>$val[id]</td> 
+				<td>$val[title](第 $val[prow] 条)</td>
+                <td><!--{date($value[diydt],'Y-m-d H:i:s')}--></td>
+                <td><a href="$baseurl&ac=diycontent&op=contentedit&contentid=$value[id]">编辑</a>&nbsp;<a href="javascript:if(confirm('您真的要删除吗?')){location.href='$baseurl&ac=diycontent&op=del&contentid=$value[id]';}">删除</a></td>
+            </tr>
+           <!--{/loop}-->
+		      <tr>
+               <td colspan="4"><input type="button" class="btn" onclick="location.href='$baseurl&ac=diycontent&op=contentadd&ptid=$_GET[ptid]'" value="添加内容" /></td>
+             </tr>
+         </table>
+<!--{elseif $_GET['op']=='typelist'}--> <!--位置列表-->
+<div class="subtitle">自定义位置管理</div>
+  <table class="maintable" border="0" cellspacing="0" cellpadding="0"> 
+              <tr class="altbg1">
+                <td>id</td>
+			    <td>名字</td>
+                <td>字段列表</td>
+                <td width="100">操作</td>
+            </tr>
+            <!--{loop $typearr $value}-->
+               <tr>
+                <td>$value[id]</td> 
+				<td>$value[typename]</td>
+                <td>$value[displayfield]</td>
+                <td><a href="$baseurl&ac=diycontent&op=typeedit&typeid=$value[id]">编辑</a>&nbsp;<a href="javascript:if(confirm('您真的要删除吗?')){location.href='$baseurl&ac=diycontent&op=del&typeid=$value[id]';}">删除</a></td>
+            </tr>
+           <!--{/loop}-->
+		      <tr>
+               <td colspan="4"><input type="button" class="btn" onclick="location.href='$baseurl&ac=diycontent&op=typeadd'" value="添加新位置" /></td>
+             </tr>
+         </table>
+<!--{elseif $_GET['op']=='contentadd' || $_GET['op']=='contentedit'}--> <!--添加或编辑内容-->
+<div class="subtitle">添加/编辑内容</div>
+ <link type="text/css" href="public/js/themes/base/ui.all.css" rel="stylesheet" />
+ 	<script type="text/javascript" src="public/js/ui/ui.core.js"></script>
+	<script type="text/javascript" src="public/js/ui/ui.datepicker.js"></script>
+	<script type="text/javascript" src="public/js/ui/i18n/ui.datepicker-zh-CN.js"></script>
+<form name="form1" method="post" action="$baseurl&ac=diycontent">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+ 		<tr>
+		<td class="altbg1"><strong><!--{if $disfarr['title']}-->$disfarr['title']<!--{else}-->标题<!--{/if}--></strong></td>
+		<td><input type="text" name="pcontent[title]" value="$pcontent[title]" size="30"><span class="gray">*必填</span> 时间<input type="text" name="pcontent[diydt]" value="<!--{date($pcontent['diydt'],'Y-m-d H:i:s')}-->" class="dtcl"/><input name="dellast" type="checkbox" id="dellast"  checked="checked" value="1" />
+		删除最后一条?	</td>
+		</tr>
+		
+		<!--{if $disfarr['arturl'] }-->
+		<tr><td class="altbg1"><strong>$disfarr['arturl']</strong></td><td><input type="text" name="pcontent[arturl]" value="$pcontent[arturl]" size="80" /></td></tr>
+		<!--{/if}-->
+		<tr><td class="altbg1"><strong>参数</strong></td><td>位置 <select name="pcontent[ptid]">
+		<!--{loop $typearr  $value}-->
+		<option value="{$value['id']}" <!--{if $value['id']==$pcontent['ptid']}-->selected<!--{/if}-->>$value[typename]</option>
+		<!--{/loop}-->
+ 		</select>第 <input type="text" name="pcontent[prow]" value="$pcontent[prow]" size="10" />个
+		</td></tr>
+		<!--{if $disfarr['pic'] }-->
+		<tr><td class="altbg1"><strong>$disfarr['pic']</strong></td><td><input type="text" name="pcontent[pic]" value="$pcontent[pic]" /></td></tr>
+		<!--{/if}-->
+		
+		<!--{if $disfarr['field1'] }-->
+		<tr><td class="altbg1"><strong>$disfarr['field1']</strong></td><td><input type="text" name="pcontent[field1]" value="$pcontent[field1]" size="80" /></td></tr>
+ 		<!--{/if}-->
+		<!--{if $disfarr['field2'] }-->
+		<tr><td class="altbg1"><strong>$disfarr['field2']</strong></td><td><input type="text" name="pcontent[field2]" value="$pcontent[field2]" size="80" /></td></tr>
+		<!--{/if}-->
+		<!--{if $disfarr['field3']}-->
+		<tr><td class="altbg1"><strong>$disfarr['field3']</strong></td><td><input type="text" name="pcontent[field3]" value="$pcontent[field3]" size="80" /></td></tr>
+		<!--{/if}-->
+		<!--{if $disfarr['field4']}-->
+		<tr><td class="altbg1"><strong>$disfarr['field4']</strong></td><td><input type="text" name="pcontent[field4]" value="$pcontent[field4]" size="80" /></td></tr>
+		<!--{/if}-->
+ 		<!--{if $disfarr['content']}-->
+		<tr>
+		<td class="altbg1"><strong>$disfarr['content']</strong></td>
+		<td>
+		<textarea class="userData" name="pcontent[content]" rows="10" cols="100">$pcontent[content]</textarea>
+ 		</td>
+		</tr>
+  		<!--{/if}--> 
+ 		</table>
+		 <center><input type="hidden" name="contentid" value="$pcontent[id]"><input type="submit" name="contentsubmit" value=" 提交 " class="btn" /></center>
+</form>
+<!--{elseif $_GET['op']=='typeadd' || $_GET['op']=='typeedit'}--><!--添加编辑类别-->
+<div class="subtitle">添加编辑位置</div>
+<form method="post" action="$baseurl&ac=diycontent">
+<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td class="altbg1">位置名</td>
+<td> <input type="text" name="ptype[typename]" value="$ptype[typename]">
+	 排序(显示用)<input type="text" name="ptype[porder]" value="$ptype[porder]">
+	</td>
+</tr>
+<tr>
+	<td class="altbg1">可用字段</td>
+	<td><!--{loop $fieldarr $val}-->$val[Field],<!--{/loop}--></td>
+</tr>	
+<tr>
+	<td class="altbg1"><strong>默认值</strong>格式:fname|默认值,fname|默认值</td>
+	<td><textarea class="userData"  name="ptype[defaultvalue]" cols="100" rows="5">$ptype[defaultvalue]</textarea></td>
+</tr>
+<tr>
+	<td class="altbg1"><strong>显示字段</strong>格式:fname|前缀,fname|前缀</td>
+	<td><textarea class="userData"  name="ptype[displayfield]" cols="100" rows="5">$ptype[displayfield]</textarea>
+	</td>
+</tr>
+</table>
+<center><input type="hidden" name="typeid" value="$ptype[id]">
+ 		<input type="submit" name="typesubmit" value="提交保存" class="submit"></center>
+</form>		
+<!--{/if}-->
+ 	</div>
+</div>
+ <script language="javascript">
+ 	 $(function(){
+		   $(".dtcl").datepicker({changeMonth: true,changeYear: true});
+	 });
+
+</script>

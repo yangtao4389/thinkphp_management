@@ -1,0 +1,24 @@
+<!--{eval $_TPL['title']='提示消息';}--> 
+<!--{template header}-->
+<link href="admin/images/login.css" rel="stylesheet" type="text/css" />
+<div id="body">
+ 
+    <table   width="600" border="0" cellpadding="8" cellspacing="0" class="login_table">
+     <tr>
+    <td   class="table_title" style="text-align:center">提示消息</td>
+</tr>
+	    <tr><td align="center"><center>
+		$message
+</center>
+</td></tr>
+<tr><td align="center"><center>
+		<!--{if $url_forward}-->
+			<a href="$url_forward">如果页面没跳转请点击此链接...</a>
+ 	<!--{else}-->
+	<a href="javascript:history.back(-1)">返回上一页</a> &nbsp;<script>setTimeout("history.go(-1);",$second*1000);</script>
+	<!--{/if}-->
+</center></td></tr>
+    </table>       
+    
+</div>
+<!--{template footer}-->

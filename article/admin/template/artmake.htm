@@ -1,0 +1,70 @@
+<div id="body">
+    <div class="space">
+	<!--{if $_GET['op']=='marttypelist' }-->
+ 	<div class="subtitle">生成类别</div>
+ 	  	<form method="get" action="$baseurl&ac=artmake"   target='stafrm'>
+		 <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+ 		 	<tr>
+				<td width="25%" class="altbg1"><strong>类别列表</strong></td><td>
+				<select name="arttid">
+					<option value="0">全部类别</option>
+					<!--{loop $arttarr $val}-->
+					<option value="$val[id]" <!--{if $val['id']==$_GET['tid'] || $val['id']==$article['tid'] }-->selected<!--{/if}-->>$val[typenbsp] <!--{if $val['degree']==1}--><font color="#FF0000">*</font><!--{/if}-->$val[ctypename]</option>
+				    <!--{/loop}-->
+				</select>
+				</td>
+			</tr>
+ 		    <tr>
+                <td class="altbg1"><strong>生成每个类别前</strong></td>
+                <td><input type="text" name="mpagenum" size="10" value="2"/>页</td>
+            </tr>
+   	  </table>
+	   <center><input type="hidden"  name="mtype" value="arttlist" /><input type="submit" name="arttypemakesubmit" value=" 生成 " class="btn" /></center>
+      </form>
+  <!--{elseif $_GET['op']=='martlist'}-->
+  	<div class="subtitle">生成内容页</div>
+ 	  <form method="get" action="$baseurl&ac=artmake"   target='stafrm'>
+		<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+ 		 	<tr>
+				<td width="25%" class="altbg1"><strong>类别列表</strong></td><td>
+				<select name="arttid">
+					<option value="0">全部类别</option>
+				<!--{loop $arttarr $val}-->
+					<option value="$val[id]" <!--{if $val['id']==$_GET['tid'] || $val['id']==$article['tid'] }-->selected<!--{/if}-->>$val[typenbsp] <!--{if $val['degree']==1}--><font color="#FF0000">*</font><!--{/if}-->$val[ctypename]</option>
+				<!--{/loop}-->	
+				</select>
+				</td>
+			</tr>
+		<tr><td class="altbg1"><strong>时间段</strong>包含所选日期</td><td>开始时间:<input type="text" name="startdt"/>结束时间:<input type="text" name="enddt" /></td></tr>	
+    	</table>
+	    <center><input type="submit" name="artmakesubmit" value=" 生成 " class="btn" /></center>
+      </form>
+<!--{elseif $_GET['op']=='makeone'}-->
+	 <div class="subtitle">生成指定页面</div>
+ 	  <form method="get" action="$baseurl&ac=artmake"   target='stafrm'>
+		<table class="maintable" border="0" cellspacing="0" cellpadding="0">
+ 		 	<tr>
+				<td width="25%" class="altbg1"><strong>文件列表</strong>全路径例如http://www.2366.com/index.html</td>
+				<td id="flist">
+				文件地址<input type="button"  class="btn"  value="增加地址框" onClick="addimgbox();"/><br />
+				1.<input type="text" name="flarr[]">
+				</td>
+			</tr>
+    	</table>
+	    <center><input type="hidden"  name="mtype" value="onepage" /><input type="submit" name="artmakesubmit" value=" 生成 " class="btn" /></center>
+      </form>
+	  	<script language="javascript">
+ 		var value=1;
+		function addimgbox(){
+			value +=1;
+			$("#flist").append(value+'<input type="text" name="flarr[]"><br>');
+		}
+	</script>
+<!--{/if}-->
+  <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+   <tr>
+   	<td height="200px"><iframe name="stafrm" frameborder="0" id="stafrm" width="100%" height="100%"></iframe></td>
+   </tr>
+  </table>
+ 	</div>
+</div>

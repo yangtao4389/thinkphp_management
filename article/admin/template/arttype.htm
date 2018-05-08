@@ -1,0 +1,109 @@
+<div id="body">
+    <div class="space">
+	<!--{if $_GET['op']=='arttypelist' }-->
+ 
+	<div class="subtitle">类别列表</div>
+ 	    <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+	 
+	 
+             <tr class="altbg1">
+                <td>id</td>
+			    <td>类别名</td>
+                <td >分类级数</td>
+                <td>绑定域名</td>
+                 <td>首页/列表页目录</td>
+                 <td>内容页目录</td>
+                 <td width="100">操作</td>
+            </tr>
+            <!--{loop $typearr $val}-->
+               <tr  <!--{if $val['degree']==1}-->class="altbg2"<!--{/if}--> >
+                <td>$val[id]</td> 
+				<td>$val[typenbsp] $val[ctypename] <!--{if $val['ishide']==1}--><font color="#FF0000">隐藏</font><!--{/if}--></td>
+                <td>$val[degree]级分类</td>
+                <td>$val[domainname]</td>
+                <td>$val[typedir]</td>
+                 <td>$val[contentdir]</td>
+                <td><a href="$baseurl&ac=arttype&op=addtype&tid=$val[id]">添加下级分类</a>&nbsp;<a href="$baseurl&ac=arttype&op=edittype&id=$val[id]">修改</a>&nbsp;<a href="$baseurl&ac=arttype&op=del&tid=$val[id]" onClick="return window.confirm('本操作不可逆，您确认删除吗？');">删除</a> </td>
+            </tr>
+           <!--{/loop}--> 
+		          <tr>
+                <td colspan="7"><input type="button" class="btn" onclick="location.href='$baseurl&ac=arttype&op=addtype'" value="添加顶级类别" /></td>
+              </tr>
+         </table>
+	<!--{elseif $_GET['op']=='addtype' || $_GET['op']=='edittype' }-->
+	<div class="subtitle">添加修改类别</div>
+ 		<form method="post" action="$baseurl&ac=arttype">
+		 <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+		
+		 	<tr>
+				<td width="25%" class="altbg1"><strong>类别名</strong>类别名中不允许出现"|"</td><td><b>$prexarr[0]</b>><input type="text" name="arttype[tname]" value="$arttype[tname]"  class="txtbox2"/></td>
+			</tr>
+			<tr>
+				<td width="25%" class="altbg1"><strong>绑定域名</strong>不带反斜线例如:http://www.2366.com</td><td><input type="text" name="arttype[domainname]" value="$arttype[domainname]"  class="txtbox2"/></td>
+			</tr>
+			   <tr>
+                <td class="altbg1"><strong>相关参数</strong></td>
+                <td>排序:<input type="text" name="arttype[torder]" value="$arttype[torder]" size="10" />每页<input type="text" name="arttype[perpage]" value="$arttype[perpage]" size="10"  />条&nbsp;隐藏<input type="checkbox" value="1" name="arttype[ishide]"  <!--{if $arttype['ishide']==1}-->checked="checked"<!--{/if}--> /></td>
+           </tr>
+			<tr>
+                <td class="altbg2" colspan="2"><strong>模板相关(相关设置在后台首页->文章设置里)</strong></td>
+			</tr>
+			<tr>
+                <td class="altbg1"><strong>封面模板</strong></td>
+                <td>/<input type="text" name="arttype[tmpindex]"  value="$arttype[tmpindex]" class="txtbox2" />&nbsp;封面模板?<input type="checkbox" name="arttype[isindexpage]"  value="1"/></td>
+            </tr>
+ 			<tr>
+				<td  class="altbg1"><strong>列表页模板</strong></td>
+				<td>/<input type="text" name="arttype[tmplist]" value="$arttype[tmplist]" class="txtbox2"/>*不填写为默认模板</td>
+			</tr>
+			<tr>
+				<td  class="altbg1"><strong>内容页模板</strong></td>
+				<td>/<input type="text" name="arttype[tmpcontent]" value="$arttype[tmpcontent]" class="txtbox2"/>*不填写为默认模板</td>
+			</tr>
+			<tr>
+                <td class="altbg2" colspan="2"><strong>生成页面参数(伪静态不需要填写)</strong></td>
+			</tr>
+			<tr>
+                <td class="altbg1"><strong>列表页存放目录</strong>例如/article/html/,可用标识符:类别名 [typeid],年[Y],月[m],日[d]</td>
+                <td><input type="text" name="arttype[typedir]"  value="$arttype[typedir]" class="txtbox2" /></td>
+            </tr>
+			<tr>
+                <td class="altbg1"><strong>内容页存放目录</strong>例如/article/html/,可用标识符:类别名[typeid],年[Y],月[m],日[d]</td>
+                <td><input type="text" name="arttype[contentdir]"  value="$arttype[contentdir]" class="txtbox2" /></td>
+            </tr>
+      
+  	  </table>
+	   <center><input type="hidden"  name="arttype[pid]" value="$arttype[pid]" /><input type="hidden"  name="arttype[degree]" value="$arttype[degree]" /><input type="hidden"  name="arttypeid" value="$arttype[id]" />
+		<input type="submit" name="typesubmit" value=" 提交 " class="btn" /></center>
+      </form>
+ <!--{elseif $_GET['op']=='flaglist' || $_GET['op']=='editflag' || $_GET['op']=='addflag'}-->
+ 	<div class="subtitle">自定义标记列表</div>
+	 	    <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+               <tr class="altbg1">
+                 <td>id</td>
+                 <td>标识名</td>
+                  <td width="100">操作</td>
+            </tr>
+            <!--{loop $flagarr $val}-->
+               <tr >
+                <td>$val[id]</td> 
+		 
+                <td>$val[flagname]</td>
+                 <td><a href="$baseurl&ac=arttype&op=editflag&id=$val[id]">修改</a>&nbsp;<a href="$baseurl&ac=arttype&op=del&flagid=$val[id]" onClick="return window.confirm('本操作不可逆，您确认删除吗？');">删除</a> </td>
+            </tr>
+           <!--{/loop}--> 
+		         
+         </table>
+ 		<form method="post" action="$baseurl&ac=arttype">
+		 <table class="maintable" border="0" cellspacing="0" cellpadding="0">
+ 		 	<tr>
+			<td><b>标识名:</b><input type="text" name="artflag[flagname]" value="$artflag[flagname]"  class="txtbox2"/><input type="hidden"  name="flagid" value="$artflag[id]" />
+		<input type="submit" name="flagsubmit" value=" 提交 " class="btn" /></td>
+			</tr>
+   	  </table>
+      </form>
+ 
+ 
+	  <!--{/if}-->
+ 	</div>
+</div>

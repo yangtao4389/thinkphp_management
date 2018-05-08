@@ -1,0 +1,1 @@
+<?php if(!defined('IN_WEB')) exit('Access Denied');?> <a href="/admincp.php">后台地址 </a>

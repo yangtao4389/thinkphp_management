@@ -1,0 +1,1 @@
+a:2:{i:0;a:6:{s:2:"id";s:1:"2";s:7:"adtitle";s:6:"google";s:4:"asid";s:1:"2";s:8:"clickper";s:1:"2";s:5:"adurl";s:15:"http://www.g.cn";s:8:"clicknum";s:1:"0";}i:1;a:6:{s:2:"id";s:1:"1";s:7:"adtitle";s:5:"baidu";s:4:"asid";s:1:"2";s:8:"clickper";s:1:"1";s:5:"adurl";s:20:"http://www.baidu.com";s:8:"clicknum";s:1:"0";}}

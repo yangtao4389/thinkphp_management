@@ -1,0 +1,1 @@
+a:2:{i:0;a:6:{s:2:"id";s:1:"4";s:7:"adtitle";s:4:"fdsf";s:4:"asid";s:1:"1";s:8:"clickper";s:5:"15545";s:5:"adurl";s:5:"afdsf";s:8:"clicknum";s:1:"0";}i:1;a:6:{s:2:"id";s:1:"3";s:7:"adtitle";s:5:"dfsaf";s:4:"asid";s:1:"1";s:8:"clickper";s:3:"999";s:5:"adurl";s:4:"fdsf";s:8:"clicknum";s:1:"0";}}
